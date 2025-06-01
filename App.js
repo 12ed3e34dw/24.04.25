@@ -1,4 +1,4 @@
-import {Button, StyleSheet, Text, View, StatusBar} from 'react-native';
+
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
@@ -6,34 +6,45 @@ import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {createDrawerNavigator} from "@react-navigation/drawer";
 import {createMaterialTopTabNavigator} from "@react-navigation/material-top-tabs";
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import React, { useState } from 'react';
+import { Button, Text, View, Alert,StatusBar} from 'react-native';
 
 
-function Page_1(){
-    return(
+function Page_1()
+{
+    return (
         <View>
             <Text>Hello World</Text>
         </View>
     )
 }
 
-function Page_2(){
-
-      return (
-          <View>
-              <Button title={'+'} onPress={() => {}}/>
-              <Text></Text>
-              <Button title={'-'} onPress={() => {
-              }}/>
-          </View>
-      )
 
 
 
+function Page_2() {
+    const [count, setCount] = useState(0);
 
+    const n1 = () => {
+        setCount(prev => prev + 1);
+    };
 
+    const n2 = () => {
+        if (count < 1) {
+            Alert.alert('Error');
+            return;
+        }
+        setCount(prev => prev - 1);
+    };
+
+    return (
+        <View style={{ alignItems: 'center', marginTop: 50 }}>
+            <Button title="+" onPress={n1} />
+            <Text style={{ fontSize: 32, marginVertical: 20 }}>{count}</Text>
+            <Button title="-" onPress={n2} />
+        </View>
+    );
 }
-
-
 
 const TopTab = createMaterialTopTabNavigator();
 
